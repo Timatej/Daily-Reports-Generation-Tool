@@ -1,0 +1,18 @@
+@import "../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+.glyphicon {
+  top: 0;
+}
+
+.story-finder {
+  ul {
+    max-height: 500px;
+    overflow-y: scroll;
+    padding-left: 20px;
+  }
+
+  input {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+
+}

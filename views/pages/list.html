@@ -1,0 +1,31 @@
+<div class="container">
+    <h1>Scrum A Daily Status Report {{list.today}}</h1>
+    <h3>List of Blockers</h3>
+    <ul>
+        <li ng-repeat="(story,comments) in list.blockers">
+            <a href="{{list.taskURL.replace('@@story@@', story)}}" target="_blank">#{{story}}</a> - {{list.stories[story]}}
+            <div style="margin-left: 20px; font-style: italic" ng-repeat="item in comments"><u>{{item.reporter}}</u>: {{item.comment}} - <span style="color: red;font-weight: bold">{{item.person}}</span> </div>
+        </li>
+        <li ng-if="list.blockers.length == 0">None</li>
+    </ul>
+
+    <hr>
+
+    <div ng-repeat="(name, report) in list.list">
+        <h3 ng-click="list.toOOO(name)">{{name}}</h3>
+        <div ng-if="report.info">
+            <h5>Blockers/Issues/Questions</h5>
+            <div task-list list="report.blockers"></div>
+
+            <h5>Worked on Today</h5>
+            <div task-list list="report.today"></div>
+
+            <h5>Planned for Tomorrow</h5>
+            <div task-list list="report.tomorrow"></div>
+        </div>
+        <div ng-if="!report.info" style="color: red;font-weight: bold">
+            Missing report
+        </div>
+        <hr>
+    </div>
+</div>

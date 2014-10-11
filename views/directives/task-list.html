@@ -1,0 +1,7 @@
+<ul>
+    <li ng-repeat="item in list">
+        <span ng-if="item.id > 10"><a href="{{getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - </span>{{stories[item.id]}}
+        <div style="margin-left: 20px; font-style: italic">{{item.comment}} <span style="color: red;font-weight: bold" ng-if="item.person"> - {{item.person}}</span></div>
+    </li>
+    <li ng-if="list.length == 0">None</li>
+</ul>

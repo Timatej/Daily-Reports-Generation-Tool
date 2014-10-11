@@ -1,0 +1,55 @@
+<div class="container col-md-8">
+    <h2><input type="text" placeholder="Full Name" ng-model="info.result.info.name"> -
+        <select ng-model="info.result.info.location">
+            <option ng-repeat="(location, value) in info.locations" value="{{location}}">{{location}}</option>
+        </select>
+    </h2>
+    <h3>Blockers/Issues/Questions</h3>
+        <ul>
+            <li ng-repeat="item in info.result.blockers">
+                <span ng-if="item.id > 10"><a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - </span>{{info.stories[item.id]}}
+                <a href="#" class="btn btn-xs btn-danger" ng-click="info.removeBlocker($index);"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-minus"></span> </a>
+                <div style="margin-left: 20px; font-style: italic">{{item.comment}} - <span style="color: red;font-weight: bold">{{item.person}}</span> </div>
+            </li>
+            <li>
+                <input type="text" placeholder="AM #" ng-model="info.blocker.id" size="6">
+                <input type="text" placeholder="Comment"  ng-model="info.blocker.comment" size="70">
+                <input type="text" placeholder="Blocking Person"  ng-model="info.blocker.person" size="14">
+                <a class="btn btn-xs btn-success" ng-click="info.addBlocker();"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-plus"></span> </a>
+            </li>
+        </ul>
+    <h3>Worked on Today</h3>
+    <ul>
+        <li ng-repeat="item in info.result.today">
+            <span ng-if="item.id > 10"><a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - </span>{{info.stories[item.id]}}
+            <a href="#" class="btn btn-xs btn-danger" ng-click="info.removeToday($index);"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-minus"></span> </a>
+            <div style="margin-left: 20px; font-style: italic">{{item.comment}}</div>
+        </li>
+        <li>
+            <input type="text" placeholder="AM #" ng-model="info.today.id" size="6">
+            <input type="text" placeholder="Comment"  ng-model="info.today.comment" size="70">
+            <a class="btn btn-xs btn-success" ng-click="info.addToday();"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-plus"></span> </a>
+        </li>
+    </ul>
+    <h3>Planned for Tomorrow</h3>
+    <ul>
+        <li ng-repeat="item in info.result.tomorrow">
+            <span ng-if="item.id > 10"><a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - </span>{{info.stories[item.id]}}
+            <a href="#" class="btn btn-xs btn-danger" ng-click="info.removeTomorrow($index);"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-minus"></span> </a>
+            <div style="margin-left: 20px; font-style: italic">{{item.comment}}</div>
+        </li>
+        <li>
+            <input type="text" placeholder="AM #" ng-model="info.tomorrow.id" size="6">
+            <input type="text" placeholder="Comment"  ng-model="info.tomorrow.comment" size="70">
+            <a class="btn btn-xs btn-success" ng-click="info.addTomorrow();"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-plus"></span> </a>
+        </li>
+    </ul>
+</div>
+<div class="container col-md-4 story-finder">
+    <h2>Task Finder</h2>
+    <input type="text" placeholder="Type to Filter" ng-model="info.storiesFilterValue" value="">
+    <ul>
+        <li ng-repeat="(id, story) in info.stories | ObjectsFilter:info.storiesFilterValue">{{id}} - {{story}}</li>
+    </ul>
+
+</div>
