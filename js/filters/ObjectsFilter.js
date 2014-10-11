@@ -10,7 +10,6 @@ function ObjectsFilter() {
                 result[key] = objects[key];
             }
         }
-
         return result;
     }
 }

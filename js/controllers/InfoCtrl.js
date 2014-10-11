@@ -6,6 +6,7 @@ function InfoCtrl(StoriesService, ResultService, StorageService) {
     this.locations = consumer.locations;
     this.getTaskUrl = consumer.getTaskUrl;
     this.storiesFilterValue = '';
+    this.team = consumer.team;
 
     this.blocker = {
         id: '',

@@ -1178,11 +1178,11 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('pages/info.html',
     "<div class=\"container col-md-8\">\n" +
-    "    <h2><input type=\"text\" placeholder=\"Full Name\" ng-model=\"info.result.info.name\"> -\n" +
-    "        <select ng-model=\"info.result.info.location\">\n" +
-    "            <option ng-repeat=\"(location, value) in info.locations\" value=\"{{location}}\">{{location}}</option>\n" +
-    "        </select>\n" +
-    "    </h2>\n" +
+    "    <div>\n" +
+    "        <select ng-model=\"info.result.info.name\" ng-options=\"name as name for (name, value) in info.team\"></select>\n" +
+    "        -\n" +
+    "        <select ng-model=\"info.result.info.location\"  ng-options=\"name as name for (name, value) in info.locations\"></select>\n" +
+    "    </div>\n" +
     "    <h3>Blockers/Issues/Questions</h3>\n" +
     "        <ul>\n" +
     "            <li ng-repeat=\"item in info.result.blockers\">\n" +
@@ -1303,7 +1303,6 @@ function ObjectsFilter() {
                 result[key] = objects[key];
             }
         }
-
         return result;
     }
 }
@@ -1496,6 +1495,7 @@ function InfoCtrl(StoriesService, ResultService, StorageService) {
     this.locations = consumer.locations;
     this.getTaskUrl = consumer.getTaskUrl;
     this.storiesFilterValue = '';
+    this.team = consumer.team;
 
     this.blocker = {
         id: '',

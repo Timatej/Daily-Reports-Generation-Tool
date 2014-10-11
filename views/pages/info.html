@@ -1,9 +1,9 @@
 <div class="container col-md-8">
-    <h2><input type="text" placeholder="Full Name" ng-model="info.result.info.name"> -
-        <select ng-model="info.result.info.location">
-            <option ng-repeat="(location, value) in info.locations" value="{{location}}">{{location}}</option>
-        </select>
-    </h2>
+    <div>
+        <select ng-model="info.result.info.name" ng-options="name as name for (name, value) in info.team"></select>
+        -
+        <select ng-model="info.result.info.location"  ng-options="name as name for (name, value) in info.locations"></select>
+    </div>
     <h3>Blockers/Issues/Questions</h3>
         <ul>
             <li ng-repeat="item in info.result.blockers">
