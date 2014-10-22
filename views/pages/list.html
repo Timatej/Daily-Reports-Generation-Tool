@@ -3,7 +3,7 @@
     <h3>List of Blockers</h3>
     <ul>
         <li ng-repeat="(story,comments) in list.blockers">
-            <a href="{{list.taskURL.replace('@@story@@', story)}}" target="_blank">#{{story}}</a> - {{list.stories[story]}}
+            <a href="{{list.getTaskUrl(story)}}" target="_blank">#{{story}}</a> - {{list.stories[story]}}
             <div style="margin-left: 20px; font-style: italic" ng-repeat="item in comments"><u>{{item.reporter}}</u>: {{item.comment}} - <span style="color: red;font-weight: bold">{{item.person}}</span> </div>
         </li>
         <li ng-if="list.blockers.length == 0">None</li>
@@ -23,8 +23,9 @@
             <h5>Planned for Tomorrow</h5>
             <div task-list list="report.tomorrow"></div>
         </div>
-        <div ng-if="!report.info" style="color: red;font-weight: bold">
-            Missing report
+        <div ng-if="!report.info" class="no-report">
+            <div ng-if="!report.ooo" ng-click="list.toOOO(name)" class="missing" title="Click to switch to OOO">Missing report</div>
+            <div ng-if="report.ooo" ng-click="list.fromOOO(name)" title="Click to switch to Missing report">Out Of Office</div>
         </div>
         <hr>
     </div>

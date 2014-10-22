@@ -5302,3 +5302,9 @@ button.close {
 .story-finder input {
   margin-bottom: 10px;
   width: 100%; }
+
+.no-report {
+  font-weight: bold;
+  cursor: pointer; }
+  .no-report .missing {
+    color: red; }

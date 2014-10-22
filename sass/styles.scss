@@ -16,3 +16,10 @@
   }
 
 }
+.no-report {
+  font-weight: bold;
+  cursor: pointer;
+  .missing {
+    color: red;
+  }
+}

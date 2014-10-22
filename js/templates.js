@@ -107,7 +107,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +
-    "            <a href=\"{{list.taskURL.replace('@@story@@', story)}}\" target=\"_blank\">#{{story}}</a> - {{list.stories[story]}}\n" +
+    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">#{{story}}</a> - {{list.stories[story]}}\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\" ng-repeat=\"item in comments\"><u>{{item.reporter}}</u>: {{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "        </li>\n" +
     "        <li ng-if=\"list.blockers.length == 0\">None</li>\n" +
@@ -127,8 +127,9 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "            <h5>Planned for Tomorrow</h5>\n" +
     "            <div task-list list=\"report.tomorrow\"></div>\n" +
     "        </div>\n" +
-    "        <div ng-if=\"!report.info\" style=\"color: red;font-weight: bold\">\n" +
-    "            Missing report\n" +
+    "        <div ng-if=\"!report.info\" class=\"no-report\">\n" +
+    "            <div ng-if=\"!report.ooo\" ng-click=\"list.toOOO(name)\" class=\"missing\" title=\"Click to switch to OOO\">Missing report</div>\n" +
+    "            <div ng-if=\"report.ooo\" ng-click=\"list.fromOOO(name)\" title=\"Click to switch to Missing report\">Out Of Office</div>\n" +
     "        </div>\n" +
     "        <hr>\n" +
     "    </div>\n" +

@@ -1,6 +1,5 @@
 function PreviewCtrl(StoriesService, ResultService) {
     this.stories = StoriesService.stories;
-    this.taskURL = StoriesService.taskURL;
     this.result = ResultService.result;
 
     this.reportContent = '';

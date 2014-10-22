@@ -1,4 +1,4 @@
-/*! daily-reports - v0.1.0 - 2014-10-11 */
+/*! daily-reports - v0.1.0 - 2014-10-22 */
 
 (function(T,V,s){'use strict';function v(b){return function(){var a=arguments[0],c,a="["+(b?b+":":"")+a+"] http://errors.angularjs.org/1.2.19/"+(b?b+"/":"")+a;for(c=1;c<arguments.length;c++)a=a+(1==c?"?":"&")+"p"+(c-1)+"="+encodeURIComponent("function"==typeof arguments[c]?arguments[c].toString().replace(/ \{[\s\S]*$/,""):"undefined"==typeof arguments[c]?"undefined":"string"!=typeof arguments[c]?JSON.stringify(arguments[c]):arguments[c]);return Error(a)}}function db(b){if(null==b||Ea(b))return!1;
 var a=b.length;return 1===b.nodeType&&a?!0:y(b)||L(b)||0===a||"number"===typeof a&&0<a&&a-1 in b}function q(b,a,c){var d;if(b)if(O(b))for(d in b)"prototype"==d||("length"==d||"name"==d||b.hasOwnProperty&&!b.hasOwnProperty(d))||a.call(c,b[d],d);else if(b.forEach&&b.forEach!==q)b.forEach(a,c);else if(db(b))for(d=0;d<b.length;d++)a.call(c,b[d],d);else for(d in b)b.hasOwnProperty(d)&&a.call(c,b[d],d);return b}function Vb(b){var a=[],c;for(c in b)b.hasOwnProperty(c)&&a.push(c);return a.sort()}function Tc(b,
@@ -1241,7 +1241,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +
-    "            <a href=\"{{list.taskURL.replace('@@story@@', story)}}\" target=\"_blank\">#{{story}}</a> - {{list.stories[story]}}\n" +
+    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">#{{story}}</a> - {{list.stories[story]}}\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\" ng-repeat=\"item in comments\"><u>{{item.reporter}}</u>: {{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "        </li>\n" +
     "        <li ng-if=\"list.blockers.length == 0\">None</li>\n" +
@@ -1261,8 +1261,9 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "            <h5>Planned for Tomorrow</h5>\n" +
     "            <div task-list list=\"report.tomorrow\"></div>\n" +
     "        </div>\n" +
-    "        <div ng-if=\"!report.info\" style=\"color: red;font-weight: bold\">\n" +
-    "            Missing report\n" +
+    "        <div ng-if=\"!report.info\" class=\"no-report\">\n" +
+    "            <div ng-if=\"!report.ooo\" ng-click=\"list.toOOO(name)\" class=\"missing\" title=\"Click to switch to OOO\">Missing report</div>\n" +
+    "            <div ng-if=\"report.ooo\" ng-click=\"list.fromOOO(name)\" title=\"Click to switch to Missing report\">Out Of Office</div>\n" +
     "        </div>\n" +
     "        <hr>\n" +
     "    </div>\n" +
@@ -1415,8 +1416,6 @@ function StoriesService() {
     this.stories = consumer.stories;
     this.getTaskUrl = consumer.getTaskUrl;
 
-    this.qcURL      = 'https://agilemanager-ast.saas.hp.com/agm/webui/alm/t250273956_hp_com/Marketing_Analytics_HPcom_Tech/apm/@3OqEa3UtCf6Uy/?MULTI_DOMAIN_RES=true&MULTI_DOMAIN_RES=true&LWMDSSO_NRM=Yt-OU9teIdZKtFmjf7DdOOA5wlruCGFVgAgmSH7MLI30fPggKk4oKYE4FEp5ojPGn7QkqrSQ6MZYAmB0B10XsVGeRJh1ITnSykhp6t49uxC3l4bttBxuFUSqfQTMiY1wIS1Gf2Su-QDyv1ouCqSSBCICKOWoFzGqhL1GoCwzR64fIxReZf7zJBuj3sHIVll16JBh0_cDHDp094RKzLajddID02HZ4hUb2Frn5l1ZUaBdydgi3J74bzd8Uz-nurRMXMrGlpsCESvcxdyNhkCQkg1C-wUPLNLVqVKEo1Y6hr9p6WPbwri_s72_7VQB7Z6MdOVsVmNvH-43uOcIgINraD8AyqfvxPbJ8Uqdq9K5r53uQ-dGDdBJs6RHTrg877ANh004EkVJWDkW8hunDPuE81TQLu51D4ToRDIcEA2NzidX0d2A4xRq6VSxwVzcWDg5NEg80Z05CCITmXuy7eYTv466_6IRkI553BBhpTDc7TagqZIKBJtC_SVGH8R9M3F4V-bg0I9lHkpMdua5rpVRJCB-nj3Gae0jeT8Pg6fKL4qp1Tz9GUu8mL-UAZVqwxfXyLNjLWImJ1fMgUqyYZzgYOi0fkA4E5CK_72QvrxUh2ww4bKU2kqFzxO52bopY26hiILInh3ugrxDwtAddJpy9UXYiAioSzaje7MEiHfb3i_zE-gOW039POWXu-3Tu6XT1FOKQ_fWlEgSG8t6rL-mGoFQO8Kxr4VzJFmrbv-GQp0.&LWMDSSO_NRM=XucYSXmpLEKASYHI2RXj8cyh6Kc6PF4LIqRESCX1AF0ZQSl2wsg8oiS91KAXizHHULT-cZaDgB319XPrb-YC3yyR1lhMUx8I6_H9oC7evKY4o8HithWhX9EfYzEj-htRVW5145lLdPPeM0cJXbh2RazB2xz7uzkq7bvgY_UNgkH9-eGFmu-KgSk6vMvT1Lwi6c1SK9LYEgJgbpAUz1pYEgeDqakr76kWyRZGttvq2zu3Gmu4j7oFVpqF2y1Ux6kRXwtUbzBmTUynhM_B7-UpHWTQw1b7cVGV7EZHYbtWmR14sfES47UFcmSbh5W9elnML-VESVUEGj_P7a3s5wncvu24rXb1kkC29DexDydYxzCvCG19rk1DyAaazIp478Z5gwpCMQIcwkroP19wrX2xPE6YcIQtFtoI6bTqbjQXcA_wzUtnGIU-kztbcoZh-fNKoFlo8GxBbsWyl4W-sSw4JEvdZdK11xJtt0yAl4r5jhVJh6RIGP-x-xzk1m0yIugqgCaXRn5ze7VXolmuh6VQzFLRnQWQwdLajRhqqELuVerGlyusI80k5rAeA8U_l-Uz-PMCGUrXiA3y9CHlpKcEdzOAzODBzXf9pOzTk5WiCAXWJWC0yzJyuwYQ57mK0rq1RAUjzOCiS1Ni9CqRmnIRTh2QTsoceD6WAlGv5_QCfotbDtmCD6ycZ6fMmCUCTMFlcI7K7Q0rQWSxYeByL7MycmGatNzauYFIwJrPJYl2ZsM.&TENANTID=250273956#release/sprint_backlog/shared.update;entityTypeName=defect;productGroupId=1000;state=releaseId:1127;entityId=@@story@@';
-    this.taskURL    = 'https://agilemanager-ast.saas.hp.com/agm/webui/alm/t250273956_hp_com/Marketing_Analytics_HPcom_Tech/apm/@3OqEa3UtCf6Uy/?MULTI_DOMAIN_RES=true&MULTI_DOMAIN_RES=true&LWMDSSO_NRM=Yt-OU9teIdZKtFmjf7DdOOA5wlruCGFVgAgmSH7MLI30fPggKk4oKYE4FEp5ojPGn7QkqrSQ6MZYAmB0B10XsVGeRJh1ITnSykhp6t49uxC3l4bttBxuFUSqfQTMiY1wIS1Gf2Su-QDyv1ouCqSSBCICKOWoFzGqhL1GoCwzR64fIxReZf7zJBuj3sHIVll16JBh0_cDHDp094RKzLajddID02HZ4hUb2Frn5l1ZUaBdydgi3J74bzd8Uz-nurRMXMrGlpsCESvcxdyNhkCQkg1C-wUPLNLVqVKEo1Y6hr9p6WPbwri_s72_7VQB7Z6MdOVsVmNvH-43uOcIgINraD8AyqfvxPbJ8Uqdq9K5r53uQ-dGDdBJs6RHTrg877ANh004EkVJWDkW8hunDPuE81TQLu51D4ToRDIcEA2NzidX0d2A4xRq6VSxwVzcWDg5NEg80Z05CCITmXuy7eYTv466_6IRkI553BBhpTDc7TagqZIKBJtC_SVGH8R9M3F4V-bg0I9lHkpMdua5rpVRJCB-nj3Gae0jeT8Pg6fKL4qp1Tz9GUu8mL-UAZVqwxfXyLNjLWImJ1fMgUqyYZzgYOi0fkA4E5CK_72QvrxUh2ww4bKU2kqFzxO52bopY26hiILInh3ugrxDwtAddJpy9UXYiAioSzaje7MEiHfb3i_zE-gOW039POWXu-3Tu6XT1FOKQ_fWlEgSG8t6rL-mGoFQO8Kxr4VzJFmrbv-GQp0.&LWMDSSO_NRM=XucYSXmpLEKASYHI2RXj8cyh6Kc6PF4LIqRESCX1AF0ZQSl2wsg8oiS91KAXizHHULT-cZaDgB319XPrb-YC3yyR1lhMUx8I6_H9oC7evKY4o8HithWhX9EfYzEj-htRVW5145lLdPPeM0cJXbh2RazB2xz7uzkq7bvgY_UNgkH9-eGFmu-KgSk6vMvT1Lwi6c1SK9LYEgJgbpAUz1pYEgeDqakr76kWyRZGttvq2zu3Gmu4j7oFVpqF2y1Ux6kRXwtUbzBmTUynhM_B7-UpHWTQw1b7cVGV7EZHYbtWmR14sfES47UFcmSbh5W9elnML-VESVUEGj_P7a3s5wncvu24rXb1kkC29DexDydYxzCvCG19rk1DyAaazIp478Z5gwpCMQIcwkroP19wrX2xPE6YcIQtFtoI6bTqbjQXcA_wzUtnGIU-kztbcoZh-fNKoFlo8GxBbsWyl4W-sSw4JEvdZdK11xJtt0yAl4r5jhVJh6RIGP-x-xzk1m0yIugqgCaXRn5ze7VXolmuh6VQzFLRnQWQwdLajRhqqELuVerGlyusI80k5rAeA8U_l-Uz-PMCGUrXiA3y9CHlpKcEdzOAzODBzXf9pOzTk5WiCAXWJWC0yzJyuwYQ57mK0rq1RAUjzOCiS1Ni9CqRmnIRTh2QTsoceD6WAlGv5_QCfotbDtmCD6ycZ6fMmCUCTMFlcI7K7Q0rQWSxYeByL7MycmGatNzauYFIwJrPJYl2ZsM.&TENANTID=250273956#release/sprint_backlog/shared.update;entityTypeName=requirement;productGroupId=1000;state=releaseId:1127;entityId=@@story@@&@content;currentTabId=com.hp.alm.core.client.details.tab.overview.OverviewTabItem&&history=FArIc';
 }
 
 angular
@@ -1489,8 +1488,6 @@ angular
     .config(ImportConfig);
 function InfoCtrl(StoriesService, ResultService, StorageService) {
     this.stories = StoriesService.stories;
-    this.taskURL = StoriesService.taskURL;
-    this.qcURL = StoriesService.qcURL;
     this.result = ResultService.result;
     this.locations = consumer.locations;
     this.getTaskUrl = consumer.getTaskUrl;
@@ -1580,7 +1577,7 @@ angular
 function ListCtrl(StoriesService, ListService) {
     this.stories = StoriesService.stories;
     this.list = ListService.list;
-    this.taskURL = StoriesService.taskURL;
+    this.getTaskUrl = consumer.getTaskUrl;
     this.blockers = ListService.blockers;
 
     this.today = (new Date).toLocaleDateString();
@@ -1588,12 +1585,13 @@ function ListCtrl(StoriesService, ListService) {
     //add to Out of Office list
     this.toOOO = function(name) {
         this.list[name].ooo = true;
-        console.log(this.list[name]);
+        ListService.save();
     }
 
     //remove from Out of Office list
     this.fromOOO = function(name) {
         this.list[name].ooo = false;
+        ListService.save();
     }
 }
 
@@ -1612,7 +1610,6 @@ angular
     .config(ListConfig);
 function PreviewCtrl(StoriesService, ResultService) {
     this.stories = StoriesService.stories;
-    this.taskURL = StoriesService.taskURL;
     this.result = ResultService.result;
 
     this.reportContent = '';

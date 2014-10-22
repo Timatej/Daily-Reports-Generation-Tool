@@ -1,7 +1,7 @@
 function ListCtrl(StoriesService, ListService) {
     this.stories = StoriesService.stories;
     this.list = ListService.list;
-    this.taskURL = StoriesService.taskURL;
+    this.getTaskUrl = consumer.getTaskUrl;
     this.blockers = ListService.blockers;
 
     this.today = (new Date).toLocaleDateString();
@@ -9,12 +9,13 @@ function ListCtrl(StoriesService, ListService) {
     //add to Out of Office list
     this.toOOO = function(name) {
         this.list[name].ooo = true;
-        console.log(this.list[name]);
+        ListService.save();
     }
 
     //remove from Out of Office list
     this.fromOOO = function(name) {
         this.list[name].ooo = false;
+        ListService.save();
     }
 }
 

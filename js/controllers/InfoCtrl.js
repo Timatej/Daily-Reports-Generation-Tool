@@ -1,7 +1,5 @@
 function InfoCtrl(StoriesService, ResultService, StorageService) {
     this.stories = StoriesService.stories;
-    this.taskURL = StoriesService.taskURL;
-    this.qcURL = StoriesService.qcURL;
     this.result = ResultService.result;
     this.locations = consumer.locations;
     this.getTaskUrl = consumer.getTaskUrl;
