@@ -1,5 +1,6 @@
 <?php
-$url = 'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=61&_=1433317656558';
+$url1 = 'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=61&_=1433331098914';
+$url2 = 'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=62&_=1433331044896';
 
 $headers = array(
     'Accept:application/json, text/javascript, */*; q=0.01',
@@ -8,33 +9,41 @@ $headers = array(
     'Cache-Control:no-cache',
     'Connection:keep-alive',
     'Content-Type:application/json',
-    'Cookie: seraph.rememberme.cookie=14723%3Ad0bf82cae094975be0d2d19a0baa83a9847200c3; F5_ST=1z1z1z1433317604z604800; LastMRH_Session=255de5d6; MRHSession=ba54f4f25eaeb23fa23440a8255de5d6; JSESSIONID=D337B07F24F9FF9CFEF74547C9E456F4; atlassian.xsrf.token=BNLH-U4EQ-MRBX-L4HU|6878e9cd31ee9150bfd2bc5ba670acbd04bbc239|lin'
+    'Cookie: seraph.rememberme.cookie=14723%3Ad0bf82cae094975be0d2d19a0baa83a9847200c3; F5_ST=1z1z1z1433331018z604800; LastMRH_Session=29d34c57; MRHSession=a6f530b1ffc56ea7d402dc1929d34c57; JSESSIONID=6DCCF511938D42476E10104227D2BB6F; atlassian.xsrf.token=BNLH-U4EQ-MRBX-L4HU|ae8917309e502893b20db7b4c2dd7fe60c8e4af2|lin'
 );
-$curl = curl_init();
-curl_setopt($curl, CURLOPT_URL, $url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 0);
-curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
-curl_setopt($curl,CURLOPT_ENCODING , "gzip");
-$out = curl_exec($curl);
 
-$obj = json_decode($out);
+function getData($url_to_load, $headers) {
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url_to_load);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt ($curl, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt ($curl, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt($curl,CURLOPT_ENCODING , "gzip");
+    $out = curl_exec($curl);
 
-if (!$obj) {
-    echo $out . PHP_EOL;
-    exit(curl_error($curl));
+    $obj = json_decode($out);
+
+    if (!$obj) {
+        echo $out . PHP_EOL;
+        exit(curl_error($curl));
+    }
+    curl_close($curl);
+
+    $result = array();
+    //print_r($obj);
+    foreach ($obj->issues AS $entry) {
+        $id =  $entry->key;
+        $title =  $entry->summary;
+        $result[] = "'" . $id . '\': ' . "'" . str_replace("'", '', $title) . "'";
+
+    }
+    
+    return $result;
 }
-curl_close($curl);
 
-$result = array();
-//print_r($obj);
-foreach ($obj->issues AS $entry) {
-    $id =  $entry->key;
-    $title =  $entry->summary;
-    $result[] = "'" . $id . '\': ' . "'" . str_replace("'", '', $title) . "'";
-
-}
+$result = getData($url1, $headers);
+$result = array_merge($result, getData($url2, $headers));
 
 $output = implode(',' . PHP_EOL, $result);
 
