@@ -55,7 +55,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "                <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "            </li>\n" +
     "            <li>\n" +
-    "                <input type=\"text\" placeholder=\"AM #\" ng-model=\"info.blocker.id\" size=\"6\">\n" +
+    "                <input type=\"text\" placeholder=\"Story #\" ng-model=\"info.blocker.id\" size=\"20\">\n" +
     "                <input type=\"text\" placeholder=\"Comment\"  ng-model=\"info.blocker.comment\" size=\"70\">\n" +
     "                <input type=\"text\" placeholder=\"Blocking Person\"  ng-model=\"info.blocker.person\" size=\"14\">\n" +
     "                <a class=\"btn btn-xs btn-success\" ng-click=\"info.addBlocker();\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-plus\"></span> </a>\n" +
@@ -69,7 +69,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "            <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}}</div>\n" +
     "        </li>\n" +
     "        <li>\n" +
-    "            <input type=\"text\" placeholder=\"AM #\" ng-model=\"info.today.id\" size=\"6\">\n" +
+    "            <input type=\"text\" placeholder=\"Story #\" ng-model=\"info.today.id\" size=\"20\">\n" +
     "            <input type=\"text\" placeholder=\"Comment\"  ng-model=\"info.today.comment\" size=\"70\">\n" +
     "            <a class=\"btn btn-xs btn-success\" ng-click=\"info.addToday();\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-plus\"></span> </a>\n" +
     "        </li>\n" +
@@ -82,7 +82,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "            <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}}</div>\n" +
     "        </li>\n" +
     "        <li>\n" +
-    "            <input type=\"text\" placeholder=\"AM #\" ng-model=\"info.tomorrow.id\" size=\"6\">\n" +
+    "            <input type=\"text\" placeholder=\"Story #\" ng-model=\"info.tomorrow.id\" size=\"20\">\n" +
     "            <input type=\"text\" placeholder=\"Comment\"  ng-model=\"info.tomorrow.comment\" size=\"70\">\n" +
     "            <a class=\"btn btn-xs btn-success\" ng-click=\"info.addTomorrow();\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-plus\"></span> </a>\n" +
     "        </li>\n" +

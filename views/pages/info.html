@@ -10,7 +10,7 @@
                 <div style="margin-left: 20px; font-style: italic">{{item.comment}} - <span style="color: red;font-weight: bold">{{item.person}}</span> </div>
             </li>
             <li>
-                <input type="text" placeholder="AM #" ng-model="info.blocker.id" size="6">
+                <input type="text" placeholder="Story #" ng-model="info.blocker.id" size="20">
                 <input type="text" placeholder="Comment"  ng-model="info.blocker.comment" size="70">
                 <input type="text" placeholder="Blocking Person"  ng-model="info.blocker.person" size="14">
                 <a class="btn btn-xs btn-success" ng-click="info.addBlocker();"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-plus"></span> </a>
@@ -24,7 +24,7 @@
             <div style="margin-left: 20px; font-style: italic">{{item.comment}}</div>
         </li>
         <li>
-            <input type="text" placeholder="AM #" ng-model="info.today.id" size="6">
+            <input type="text" placeholder="Story #" ng-model="info.today.id" size="20">
             <input type="text" placeholder="Comment"  ng-model="info.today.comment" size="70">
             <a class="btn btn-xs btn-success" ng-click="info.addToday();"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-plus"></span> </a>
         </li>
@@ -37,7 +37,7 @@
             <div style="margin-left: 20px; font-style: italic">{{item.comment}}</div>
         </li>
         <li>
-            <input type="text" placeholder="AM #" ng-model="info.tomorrow.id" size="6">
+            <input type="text" placeholder="Story #" ng-model="info.tomorrow.id" size="20">
             <input type="text" placeholder="Comment"  ng-model="info.tomorrow.comment" size="70">
             <a class="btn btn-xs btn-success" ng-click="info.addTomorrow();"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-plus"></span> </a>
         </li>
