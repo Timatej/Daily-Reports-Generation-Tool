@@ -1,4 +1,4 @@
-/*! daily-reports - v0.1.0 - 2015-01-20 */
+/*! daily-reports - v0.1.0 - 2015-06-03 */
 
 (function(T,V,s){'use strict';function v(b){return function(){var a=arguments[0],c,a="["+(b?b+":":"")+a+"] http://errors.angularjs.org/1.2.19/"+(b?b+"/":"")+a;for(c=1;c<arguments.length;c++)a=a+(1==c?"?":"&")+"p"+(c-1)+"="+encodeURIComponent("function"==typeof arguments[c]?arguments[c].toString().replace(/ \{[\s\S]*$/,""):"undefined"==typeof arguments[c]?"undefined":"string"!=typeof arguments[c]?JSON.stringify(arguments[c]):arguments[c]);return Error(a)}}function db(b){if(null==b||Ea(b))return!1;
 var a=b.length;return 1===b.nodeType&&a?!0:y(b)||L(b)||0===a||"number"===typeof a&&0<a&&a-1 in b}function q(b,a,c){var d;if(b)if(O(b))for(d in b)"prototype"==d||("length"==d||"name"==d||b.hasOwnProperty&&!b.hasOwnProperty(d))||a.call(c,b[d],d);else if(b.forEach&&b.forEach!==q)b.forEach(a,c);else if(db(b))for(d=0;d<b.length;d++)a.call(c,b[d],d);else for(d in b)b.hasOwnProperty(d)&&a.call(c,b[d],d);return b}function Vb(b){var a=[],c;for(c in b)b.hasOwnProperty(c)&&a.push(c);return a.sort()}function Tc(b,
@@ -1138,7 +1138,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
   $templateCache.put('directives/task-list.html',
     "<ul>\n" +
     "    <li ng-repeat=\"item in list\">\n" +
-    "        <span ng-if=\"item.id > 10\"><a href=\"{{getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{stories[item.id]}}\n" +
+    "        <a href=\"{{getTaskUrl(item.id)}}\" target=\"_blank\">{{item.id}}</a> - {{stories[item.id]}}\n" +
     "        <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}} <span style=\"color: red;font-weight: bold\" ng-if=\"item.person\"> - {{item.person}}</span></div>\n" +
     "    </li>\n" +
     "    <li ng-if=\"list.length == 0\">None</li>\n" +
@@ -1186,7 +1186,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Blockers/Issues/Questions</h3>\n" +
     "        <ul>\n" +
     "            <li ng-repeat=\"item in info.result.blockers\">\n" +
-    "                <span ng-if=\"item.id > 10\"><a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{info.stories[item.id]}}\n" +
+    "                <a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - {{info.stories[item.id]}}\n" +
     "                <a href=\"#\" class=\"btn btn-xs btn-danger\" ng-click=\"info.removeBlocker($index);\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-minus\"></span> </a>\n" +
     "                <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "            </li>\n" +
@@ -1200,7 +1200,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Worked on Today</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"item in info.result.today\">\n" +
-    "            <span ng-if=\"item.id > 10\"><a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{info.stories[item.id]}}\n" +
+    "            <a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - {{info.stories[item.id]}}\n" +
     "            <a href=\"#\" class=\"btn btn-xs btn-danger\" ng-click=\"info.removeToday($index);\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-minus\"></span> </a>\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}}</div>\n" +
     "        </li>\n" +
@@ -1213,7 +1213,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Planned for Tomorrow</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"item in info.result.tomorrow\">\n" +
-    "            <span ng-if=\"item.id > 10\"><a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{info.stories[item.id]}}\n" +
+    "            <a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - {{info.stories[item.id]}}\n" +
     "            <a href=\"#\" class=\"btn btn-xs btn-danger\" ng-click=\"info.removeTomorrow($index);\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-minus\"></span> </a>\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}}</div>\n" +
     "        </li>\n" +
@@ -1241,7 +1241,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +
-    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">#{{story}}</a> - {{list.stories[story]}}\n" +
+    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">{{story}}</a> - {{consumer.stories[story]}}\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\" ng-repeat=\"item in comments\"><u>{{item.reporter}}</u>: {{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "        </li>\n" +
     "        <li ng-if=\"list.blockers.length == 0\">None</li>\n" +
@@ -1429,6 +1429,7 @@ function AddCtrl(StoriesService, ListService) {
 
     this.add = function(){
         var str = this.newReport.replace(/\\"/g, '\'').replace(/[^\w{}":,\[\]\/':\.]/gi, ' ');
+        console.log(str);
         var report = angular.fromJson(str);
         var name = report.info.name;
 
@@ -1465,6 +1466,7 @@ function ImportCtrl(StorageService, ResultService) {
 
     this.add = function(){
         var str = this.newReport.replace(/\\"/g, '\'').replace(/[^\w{}":,\[\]\/':\.]/gi, ' ');
+        console.log(str);
         var report = angular.fromJson(str);
         StorageService.save(report);
         this.newReport = '';

@@ -3,6 +3,7 @@ function ImportCtrl(StorageService, ResultService) {
 
     this.add = function(){
         var str = this.newReport.replace(/\\"/g, '\'').replace(/[^\w{}":,\[\]\/':\.]/gi, ' ');
+        console.log(str);
         var report = angular.fromJson(str);
         StorageService.save(report);
         this.newReport = '';

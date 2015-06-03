@@ -7,7 +7,7 @@
     <h3>Blockers/Issues/Questions</h3>
         <ul>
             <li ng-repeat="item in info.result.blockers">
-                <span ng-if="item.id > 10"><a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - </span>{{info.stories[item.id]}}
+                <a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - {{info.stories[item.id]}}
                 <a href="#" class="btn btn-xs btn-danger" ng-click="info.removeBlocker($index);"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-minus"></span> </a>
                 <div style="margin-left: 20px; font-style: italic">{{item.comment}} - <span style="color: red;font-weight: bold">{{item.person}}</span> </div>
             </li>
@@ -21,7 +21,7 @@
     <h3>Worked on Today</h3>
     <ul>
         <li ng-repeat="item in info.result.today">
-            <span ng-if="item.id > 10"><a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - </span>{{info.stories[item.id]}}
+            <a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - {{info.stories[item.id]}}
             <a href="#" class="btn btn-xs btn-danger" ng-click="info.removeToday($index);"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-minus"></span> </a>
             <div style="margin-left: 20px; font-style: italic">{{item.comment}}</div>
         </li>
@@ -34,7 +34,7 @@
     <h3>Planned for Tomorrow</h3>
     <ul>
         <li ng-repeat="item in info.result.tomorrow">
-            <span ng-if="item.id > 10"><a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - </span>{{info.stories[item.id]}}
+            <a href="{{info.getTaskUrl(item.id)}}" target="_blank">#{{item.id}}</a> - {{info.stories[item.id]}}
             <a href="#" class="btn btn-xs btn-danger" ng-click="info.removeTomorrow($index);"><span style="font-size: 22px;line-height: 22px" class="glyphicon glyphicon-minus"></span> </a>
             <div style="margin-left: 20px; font-style: italic">{{item.comment}}</div>
         </li>

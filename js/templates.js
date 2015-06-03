@@ -4,7 +4,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
   $templateCache.put('directives/task-list.html',
     "<ul>\n" +
     "    <li ng-repeat=\"item in list\">\n" +
-    "        <span ng-if=\"item.id > 10\"><a href=\"{{getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{stories[item.id]}}\n" +
+    "        <a href=\"{{getTaskUrl(item.id)}}\" target=\"_blank\">{{item.id}}</a> - {{stories[item.id]}}\n" +
     "        <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}} <span style=\"color: red;font-weight: bold\" ng-if=\"item.person\"> - {{item.person}}</span></div>\n" +
     "    </li>\n" +
     "    <li ng-if=\"list.length == 0\">None</li>\n" +
@@ -52,7 +52,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Blockers/Issues/Questions</h3>\n" +
     "        <ul>\n" +
     "            <li ng-repeat=\"item in info.result.blockers\">\n" +
-    "                <span ng-if=\"item.id > 10\"><a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{info.stories[item.id]}}\n" +
+    "                <a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - {{info.stories[item.id]}}\n" +
     "                <a href=\"#\" class=\"btn btn-xs btn-danger\" ng-click=\"info.removeBlocker($index);\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-minus\"></span> </a>\n" +
     "                <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "            </li>\n" +
@@ -66,7 +66,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Worked on Today</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"item in info.result.today\">\n" +
-    "            <span ng-if=\"item.id > 10\"><a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{info.stories[item.id]}}\n" +
+    "            <a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - {{info.stories[item.id]}}\n" +
     "            <a href=\"#\" class=\"btn btn-xs btn-danger\" ng-click=\"info.removeToday($index);\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-minus\"></span> </a>\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}}</div>\n" +
     "        </li>\n" +
@@ -79,7 +79,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Planned for Tomorrow</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"item in info.result.tomorrow\">\n" +
-    "            <span ng-if=\"item.id > 10\"><a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - </span>{{info.stories[item.id]}}\n" +
+    "            <a href=\"{{info.getTaskUrl(item.id)}}\" target=\"_blank\">#{{item.id}}</a> - {{info.stories[item.id]}}\n" +
     "            <a href=\"#\" class=\"btn btn-xs btn-danger\" ng-click=\"info.removeTomorrow($index);\"><span style=\"font-size: 22px;line-height: 22px\" class=\"glyphicon glyphicon-minus\"></span> </a>\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\">{{item.comment}}</div>\n" +
     "        </li>\n" +
@@ -107,7 +107,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +
-    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">#{{story}}</a> - {{list.stories[story]}}\n" +
+    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">{{story}}</a> - {{consumer.stories[story]}}\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\" ng-repeat=\"item in comments\"><u>{{item.reporter}}</u>: {{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "        </li>\n" +
     "        <li ng-if=\"list.blockers.length == 0\">None</li>\n" +

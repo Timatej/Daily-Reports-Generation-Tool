@@ -3,7 +3,7 @@
     <h3>List of Blockers</h3>
     <ul>
         <li ng-repeat="(story,comments) in list.blockers">
-            <a href="{{list.getTaskUrl(story)}}" target="_blank">#{{story}}</a> - {{list.stories[story]}}
+            <a href="{{list.getTaskUrl(story)}}" target="_blank">{{story}}</a> - {{consumer.stories[story]}}
             <div style="margin-left: 20px; font-style: italic" ng-repeat="item in comments"><u>{{item.reporter}}</u>: {{item.comment}} - <span style="color: red;font-weight: bold">{{item.person}}</span> </div>
         </li>
         <li ng-if="list.blockers.length == 0">None</li>
