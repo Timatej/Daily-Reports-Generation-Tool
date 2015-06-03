@@ -5,14 +5,10 @@ function PreviewCtrl(StoriesService, ResultService) {
     this.reportContent = '';
 
     this.sendReport = function() {
-        var subject = 'Daily Status Report';
-        var to = 'tim.sakharchuk@hp.com';
         var body = angular.toJson(this.result);
-        var link = 'mailto:' + to
-            + '?subject=' + subject
+        window.location.href = 'mailto:' + consumer.email.to
+            + '?subject=' + consumer.email.subject
             + '&body=' + encodeURIComponent(body);
-
-        window.location.href = link;
     }
 
     this.showCode = function(){
