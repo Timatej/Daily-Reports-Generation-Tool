@@ -1,4 +1,4 @@
-function StorageService() {
+function StorageService($http) {
     this.storage = localStorage;
 
     this.save = function(result) {
@@ -13,7 +13,7 @@ function StorageService() {
         return angular.isDefined(this.storage['dailyReport']);
     }
 
-    this.listExists = function() {
+    this.listExists = function() {return true;
         var reports = angular.fromJson(this.storage['listReport']);
         if (!reports) return false;
         return (new Date).toLocaleDateString() in reports;
@@ -27,6 +27,16 @@ function StorageService() {
     }
 
     this.getList = function() {
+        var response = $http.get(
+            'https://api.appery.io/rest/1/db/collections/report',
+            {
+                'headers': {
+                    'X-Appery-Database-Id': '556f059ee4b047fd4ca85293'
+                }
+            }
+        );
+
+        console.log(response);
         var reports = angular.fromJson(this.storage['listReport']);
         return reports[(new Date).toLocaleDateString()];
     }

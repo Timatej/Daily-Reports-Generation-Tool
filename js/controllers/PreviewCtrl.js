@@ -1,4 +1,4 @@
-function PreviewCtrl(StoriesService, ResultService) {
+function PreviewCtrl(StoriesService, ResultService, $http) {
     this.stories = StoriesService.stories;
     this.result = ResultService.result;
 
@@ -6,14 +6,22 @@ function PreviewCtrl(StoriesService, ResultService) {
 
     this.sendReport = function() {
         var body = angular.toJson(this.result);
-        window.location.href = 'mailto:' + consumer.email.to
-            + '?subject=' + consumer.email.subject
-            + '&body=' + encodeURIComponent(body);
-    }
+
+        $http.post(
+            'https://api.appery.io/rest/1/db/collections/report',
+            body,
+            {
+                'headers': {
+                    'X-Appery-Database-Id': '556f059ee4b047fd4ca85293',
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+    };
 
     this.showCode = function(){
         this.reportContent = angular.toJson(this.result);
-    }
+    };
 }
 
 function PreviewConfig($routeProvider) {
