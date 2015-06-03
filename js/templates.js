@@ -107,7 +107,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +
-    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">{{story}}</a> - {{consumer.stories[story]}}\n" +
+    "            <a href=\"{{list.getTaskUrl(story)}}\" target=\"_blank\">{{story}}</a> - {{list.stories[story]}}\n" +
     "            <div style=\"margin-left: 20px; font-style: italic\" ng-repeat=\"item in comments\"><u>{{item.reporter}}</u>: {{item.comment}} - <span style=\"color: red;font-weight: bold\">{{item.person}}</span> </div>\n" +
     "        </li>\n" +
     "        <li ng-if=\"list.blockers.length == 0\">None</li>\n" +

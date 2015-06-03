@@ -5,8 +5,7 @@ function AddCtrl(StoriesService, ListService) {
     this.newReport = '';
 
     this.add = function(){
-        var str = this.newReport.replace(/\\"/g, '\'').replace(/[^\w{}":,\[\]\/':\.]/gi, ' ');
-        console.log(str);
+        var str = this.newReport.replace(/\\"/g, '\'').replace(/[^\w{}":,\[\]\/':\.-]/gi, ' ');
         var report = angular.fromJson(str);
         var name = report.info.name;
 
