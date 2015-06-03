@@ -1180,8 +1180,6 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "<div class=\"container col-md-8\">\n" +
     "    <div>\n" +
     "        <select ng-model=\"info.result.info.name\" ng-options=\"name as name for (name, value) in info.team\"></select>\n" +
-    "        -\n" +
-    "        <select ng-model=\"info.result.info.location\"  ng-options=\"name as name for (name, value) in info.locations\"></select>\n" +
     "    </div>\n" +
     "    <h3>Blockers/Issues/Questions</h3>\n" +
     "        <ul>\n" +
@@ -1237,7 +1235,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('pages/list.html',
     "<div class=\"container\">\n" +
-    "    <h1>Scrum A Daily Status Report {{list.today}}</h1>\n" +
+    "    <h1>Exadel AppleTV Daily Status Report {{list.today}}</h1>\n" +
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +
@@ -1273,7 +1271,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('pages/preview.html',
     "<div class=\"container\">\n" +
-    "    <h1>{{preview.result.info.name}} - {{preview.result.info.location}}</h1>\n" +
+    "    <h1>{{preview.result.info.name}}</h1>\n" +
     "    <h3>Blockers/Issues/Questions</h3>\n" +
     "    <div task-list list=\"preview.result.blockers\"></div>\n" +
     "\n" +
