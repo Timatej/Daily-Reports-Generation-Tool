@@ -9,7 +9,7 @@ $headers = array(
     'Cache-Control:no-cache',
     'Connection:keep-alive',
     'Content-Type:application/json',
-    'Cookie: seraph.rememberme.cookie=14723%3Ad0bf82cae094975be0d2d19a0baa83a9847200c3; TIN=267000; F5_ST=1z1z1z1434123485z604800; LastMRH_Session=633279b2; MRHSession=66e81ce3b231739fa0454e77633279b2; JSESSIONID=3C29B5AAB701305EEE50CB163B27CE42; atlassian.xsrf.token=BNLH-U4EQ-MRBX-L4HU|9321ad437a5307ba2e6e67fb7c2a072a2112ee8d|lin'
+    'Cookie: seraph.rememberme.cookie=14723%15168%3A4e753dbb63bc4cbbb41344809b32c246a1847248; F5_ST=1z1z1z1433331018z604800; LastMRH_Session=82318484; MRHSession=784f5aa315618e2ddfa6cdf782318484; JSESSIONID=31E84F2E5DF1FBA0CD122FA60573475E; atlassian.xsrf.token=BNLH-U4EQ-MRBX-L4HU|ae8917309e502893b20db7b4c2dd7fe60c8e4af2|lin'
 );
 
 function getData($url_to_load, $headers) {

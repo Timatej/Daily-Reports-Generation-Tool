@@ -3,3 +3,4 @@ node_modules/
 .sass-cache/
 public/style.css.map
 public/scripts.js
+public/consumer.js
