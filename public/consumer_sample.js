@@ -14,7 +14,9 @@ var consumer = {
     team: {
         'Tim Sakharchuk': {},
         'Alex Shoferyuk': {},
-        'Maksym Ranchev': {}
+        'Maksym Ranchev': {},
+        'Eduard Trayan': {},
+        'Pavel Yaschenko': {}
     },
     locations: {
         'US':{},

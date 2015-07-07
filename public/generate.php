@@ -1,6 +1,6 @@
 <?php
-$url1 = 'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=61&_=1433331098914';
-$url2 = 'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=62&_=1433331044896';
+$url1 = 'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=61';
+$url2 = 'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/work/allData.json?rapidViewId=62';
 
 $headers = array(
     'Accept:application/json, text/javascript, */*; q=0.01',
@@ -9,7 +9,7 @@ $headers = array(
     'Cache-Control:no-cache',
     'Connection:keep-alive',
     'Content-Type:application/json',
-    'Cookie: seraph.rememberme.cookie=14723%3Ad0bf82cae094975be0d2d19a0baa83a9847200c3; F5_ST=1z1z1z1433331018z604800; LastMRH_Session=29d34c57; MRHSession=a6f530b1ffc56ea7d402dc1929d34c57; JSESSIONID=6DCCF511938D42476E10104227D2BB6F; atlassian.xsrf.token=BNLH-U4EQ-MRBX-L4HU|ae8917309e502893b20db7b4c2dd7fe60c8e4af2|lin'
+    'Cookie: seraph.rememberme.cookie=14723%3Ad0bf82cae094975be0d2d19a0baa83a9847200c3; TIN=267000; F5_ST=1z1z1z1434123485z604800; LastMRH_Session=633279b2; MRHSession=66e81ce3b231739fa0454e77633279b2; JSESSIONID=3C29B5AAB701305EEE50CB163B27CE42; atlassian.xsrf.token=BNLH-U4EQ-MRBX-L4HU|9321ad437a5307ba2e6e67fb7c2a072a2112ee8d|lin'
 );
 
 function getData($url_to_load, $headers) {
@@ -32,7 +32,12 @@ function getData($url_to_load, $headers) {
 
     $result = array();
     //print_r($obj);
-    foreach ($obj->issues AS $entry) {
+    if (isset($obj->issuesData)) {
+        $issues = $obj->issuesData->issues;
+    } else {
+        $issues = $obj->issues;
+    }
+    foreach ($issues AS $entry) {
         $id =  $entry->key;
         $title =  $entry->summary;
         $result[] = "'" . $id . '\': ' . "'" . str_replace("'", '', $title) . "'";
