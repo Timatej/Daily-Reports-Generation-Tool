@@ -16,7 +16,8 @@ var consumer = {
         'Alex Shoferyuk': {},
         'Maksym Ranchev': {},
         'Eduard Trayan': {},
-        'Pavel Yaschenko': {}
+        'Pavel Yaschenko': {},
+        'Igor Ivanuto': {}
     },
     locations: {
         'US':{},
