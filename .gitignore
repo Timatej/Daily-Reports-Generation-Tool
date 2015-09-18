@@ -1,0 +1,4 @@
+node_modules*
+.sass*
+.idea*
+public/cookie*

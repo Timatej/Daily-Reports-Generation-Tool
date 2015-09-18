@@ -60,4 +60,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-ng-annotate');
     grunt.loadNpmTasks('grunt-angular-templates');
+
+    grunt.registerTask('build', 'Build CSS, JS, and templates', ['concat', 'sass', 'ngtemplates']);
 }
