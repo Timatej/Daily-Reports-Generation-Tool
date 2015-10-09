@@ -147,8 +147,8 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Planned for Tomorrow</h3>\n" +
     "    <div task-list list=\"preview.result.tomorrow\"></div>\n" +
     "\n" +
-    "    <a class=\"btn btn-success\" ng-click=\"preview.sendReport();\">Send</a>\n" +
-    "    <a class=\"btn btn-success\" ng-click=\"preview.showCode();\">Show Json Code</a>\n" +
+    "    <a class=\"btn btn-success\" ng-click=\"preview.sendReport();\">Save</a>\n" +
+    "    <!--<a class=\"btn btn-success\" ng-click=\"preview.showCode();\">Show Json Code</a>-->\n" +
     "    <br>\n" +
     "    <div>{{preview.reportContent}}</div>\n" +
     "</div>"

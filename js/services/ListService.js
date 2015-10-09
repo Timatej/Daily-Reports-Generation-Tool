@@ -1,4 +1,4 @@
-function ListService(StorageService) {
+function ListService(StorageService, $http) {
     //list of people should be provided by consumer
     this.list = consumer.team;
 
@@ -29,14 +29,26 @@ function ListService(StorageService) {
         }
     }
 
+    this.getList = function(){
+        var promise = $http({
+            method: 'GET',
+            url: '/reports.php?action=get&init=' + angular.toJson(consumer.team)
+        });
+        promise.success(function(data, status, headers, conf) {
+            return data;
+        });
+        return promise;
+    }
+
     this.save = function(){
         StorageService.saveList(this.list);
     }
 
-    if (StorageService.listExists()) {
-        this.list = StorageService.getList();
+    this.setList = function(list){
+        this.list = list;
         this.refreshBlockers();
     }
+
 
 }
 

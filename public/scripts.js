@@ -1281,8 +1281,8 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
     "    <h3>Planned for Tomorrow</h3>\n" +
     "    <div task-list list=\"preview.result.tomorrow\"></div>\n" +
     "\n" +
-    "    <a class=\"btn btn-success\" ng-click=\"preview.sendReport();\">Send</a>\n" +
-    "    <a class=\"btn btn-success\" ng-click=\"preview.showCode();\">Show Json Code</a>\n" +
+    "    <a class=\"btn btn-success\" ng-click=\"preview.sendReport();\">Save</a>\n" +
+    "    <!--<a class=\"btn btn-success\" ng-click=\"preview.showCode();\">Show Json Code</a>-->\n" +
     "    <br>\n" +
     "    <div>{{preview.reportContent}}</div>\n" +
     "</div>"
@@ -1309,7 +1309,7 @@ function ObjectsFilter() {
 angular
     .module('daily')
     .filter('ObjectsFilter', ObjectsFilter);
-function ListService(StorageService) {
+function ListService(StorageService, $http) {
     //list of people should be provided by consumer
     this.list = consumer.team;
 
@@ -1340,14 +1340,26 @@ function ListService(StorageService) {
         }
     }
 
+    this.getList = function(){
+        var promise = $http({
+            method: 'GET',
+            url: '/reports.php?action=get&init=' + angular.toJson(consumer.team)
+        });
+        promise.success(function(data, status, headers, conf) {
+            return data;
+        });
+        return promise;
+    }
+
     this.save = function(){
         StorageService.saveList(this.list);
     }
 
-    if (StorageService.listExists()) {
-        this.list = StorageService.getList();
+    this.setList = function(list){
+        this.list = list;
         this.refreshBlockers();
     }
+
 
 }
 
@@ -1572,7 +1584,8 @@ angular
     .module('daily')
     .controller('InfoCtrl', InfoCtrl)
     .config(InfoConfig);
-function ListCtrl(StoriesService, ListService) {
+function ListCtrl(StoriesService, ListService, remoteList) {
+    ListService.setList(remoteList.data);
     this.stories = StoriesService.stories;
     this.list = ListService.list;
     this.getTaskUrl = consumer.getTaskUrl;
@@ -1598,7 +1611,12 @@ function ListConfig($routeProvider) {
         .when('/list', {
             templateUrl: 'pages/list.html',
             controller: 'ListCtrl',
-            controllerAs: 'list'
+            controllerAs: 'list',
+            resolve: {
+                remoteList: function(ListService) {
+                    return ListService.getList();
+                }
+            }
         })
 }
 
@@ -1606,17 +1624,21 @@ angular
     .module('daily')
     .controller('ListCtrl', ListCtrl)
     .config(ListConfig);
-function PreviewCtrl(StoriesService, ResultService) {
+function PreviewCtrl(StoriesService, ResultService, $http) {
     this.stories = StoriesService.stories;
     this.result = ResultService.result;
 
     this.reportContent = '';
 
     this.sendReport = function() {
-        var body = angular.toJson(this.result);
-        window.location.href = 'mailto:' + consumer.email.to
-            + '?subject=' + consumer.email.subject
-            + '&body=' + encodeURIComponent(body);
+        if (this.result.info.name) {
+            $http.post('/reports.php?action=save', {
+                person: this.result.info.name,
+                report: this.result
+            })
+        } else {
+            alert('Please, choose your name');
+        }
     }
 
     this.showCode = function(){

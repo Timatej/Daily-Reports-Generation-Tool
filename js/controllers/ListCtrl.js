@@ -1,4 +1,5 @@
-function ListCtrl(StoriesService, ListService) {
+function ListCtrl(StoriesService, ListService, remoteList) {
+    ListService.setList(remoteList.data);
     this.stories = StoriesService.stories;
     this.list = ListService.list;
     this.getTaskUrl = consumer.getTaskUrl;
@@ -24,7 +25,12 @@ function ListConfig($routeProvider) {
         .when('/list', {
             templateUrl: 'pages/list.html',
             controller: 'ListCtrl',
-            controllerAs: 'list'
+            controllerAs: 'list',
+            resolve: {
+                remoteList: function(ListService) {
+                    return ListService.getList();
+                }
+            }
         })
 }
 

@@ -217,7 +217,7 @@ $urls = [
 
 echo "Authentication .. ";
 
-$auth = new Auth('tsakharchuk@exadel.com', 'Nbvjifggg1');
+$auth = new Auth('email', 'pass');
 $auth->auth();
 
 echo "OK" . PHP_EOL;

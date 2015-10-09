@@ -1,14 +1,18 @@
-function PreviewCtrl(StoriesService, ResultService) {
+function PreviewCtrl(StoriesService, ResultService, $http) {
     this.stories = StoriesService.stories;
     this.result = ResultService.result;
 
     this.reportContent = '';
 
     this.sendReport = function() {
-        var body = angular.toJson(this.result);
-        window.location.href = 'mailto:' + consumer.email.to
-            + '?subject=' + consumer.email.subject
-            + '&body=' + encodeURIComponent(body);
+        if (this.result.info.name) {
+            $http.post('/reports.php?action=save', {
+                person: this.result.info.name,
+                report: this.result
+            })
+        } else {
+            alert('Please, choose your name');
+        }
     }
 
     this.showCode = function(){
