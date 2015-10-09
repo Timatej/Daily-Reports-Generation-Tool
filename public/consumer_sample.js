@@ -12,13 +12,10 @@ var consumer = {
     },
     //we cannot use simple array here, because AngularJS work incorrectly with it.
     team: {
-        'Igor Usovich': {},
-        'Eduard Trayan': {},
+        'Nikita Basalaev': {},
+        'Ros Kuzmin': {},
         'Pavel Yaschenko': {},
-        'Igor Ivanuto': {},
-        'Aliaksandr Litvinok': {},
-        'Alesia Korzun': {},
-        'Tim Sakharchuk': {}
+        'Igor Ivanuto': {}
     },
     locations: {
         'US':{},

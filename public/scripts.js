@@ -1,4 +1,4 @@
-/*! daily-reports - v0.1.0 - 2015-09-18 */
+/*! daily-reports - v0.1.0 - 2015-10-09 */
 
 (function(T,V,s){'use strict';function v(b){return function(){var a=arguments[0],c,a="["+(b?b+":":"")+a+"] http://errors.angularjs.org/1.2.19/"+(b?b+"/":"")+a;for(c=1;c<arguments.length;c++)a=a+(1==c?"?":"&")+"p"+(c-1)+"="+encodeURIComponent("function"==typeof arguments[c]?arguments[c].toString().replace(/ \{[\s\S]*$/,""):"undefined"==typeof arguments[c]?"undefined":"string"!=typeof arguments[c]?JSON.stringify(arguments[c]):arguments[c]);return Error(a)}}function db(b){if(null==b||Ea(b))return!1;
 var a=b.length;return 1===b.nodeType&&a?!0:y(b)||L(b)||0===a||"number"===typeof a&&0<a&&a-1 in b}function q(b,a,c){var d;if(b)if(O(b))for(d in b)"prototype"==d||("length"==d||"name"==d||b.hasOwnProperty&&!b.hasOwnProperty(d))||a.call(c,b[d],d);else if(b.forEach&&b.forEach!==q)b.forEach(a,c);else if(db(b))for(d=0;d<b.length;d++)a.call(c,b[d],d);else for(d in b)b.hasOwnProperty(d)&&a.call(c,b[d],d);return b}function Vb(b){var a=[],c;for(c in b)b.hasOwnProperty(c)&&a.push(c);return a.sort()}function Tc(b,
@@ -1235,7 +1235,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('pages/list.html',
     "<div class=\"container\">\n" +
-    "    <h1>Exadel AppleTV Daily Status Report {{list.today}}</h1>\n" +
+    "    <h1>Exadel WEBDISNEY Team Status Report {{list.today}}</h1>\n" +
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +

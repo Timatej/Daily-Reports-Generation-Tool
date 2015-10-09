@@ -101,7 +101,7 @@ angular.module('daily').run(['$templateCache', function($templateCache) {
 
   $templateCache.put('pages/list.html',
     "<div class=\"container\">\n" +
-    "    <h1>Exadel AppleTV Daily Status Report {{list.today}}</h1>\n" +
+    "    <h1>Exadel WEBDISNEY Team Status Report {{list.today}}</h1>\n" +
     "    <h3>List of Blockers</h3>\n" +
     "    <ul>\n" +
     "        <li ng-repeat=\"(story,comments) in list.blockers\">\n" +

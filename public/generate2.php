@@ -205,19 +205,13 @@ class Generator
 }
 
 $urls = [
-    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=62', // Disney
-    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/work/allData.json?rapidViewId=62',
-
-    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=133', // ABCF
-    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/work/allData.json?rapidViewId=133',
-
-    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=136', // ABC
-    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/work/allData.json?rapidViewId=136',
+    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/plan/backlog/data.json?rapidViewId=57', // Disney
+    'https://abcjira.disney.com/rest/greenhopper/1.0/xboard/work/allData.json?rapidViewId=57',
 ];
 
 echo "Authentication .. ";
 
-$auth = new Auth('email', 'pass');
+$auth = new Auth('user', 'pass');
 $auth->auth();
 
 echo "OK" . PHP_EOL;
